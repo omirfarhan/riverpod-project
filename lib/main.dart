@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
+}
+
+extension OptionalInfixAddition<T extends num> on T? {
+  T? operator +(T? other) {
+    final shadow = this;
+    if (shadow != null) {
+      return shadow + (other ?? 0) as T;
+    } else {
+      return null;
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +42,35 @@ class MyHomePage extends ConsumerWidget {
     final date = ref.watch(currentDate);
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text('Home page')),
-      body: Center(child: Text(date.toIso8601String())),
+      body: Column(
+        children: [
+          Text(date.toIso8601String()),
+          Consumer(
+            builder: (context, ref, child) {
+              final count = ref.watch(counterProvider);
+              final text = count == null
+                  ? 'Press your button'
+                  : count.toString();
+              return Text(text);
+            },
+          ),
+          TextButton(
+            onPressed: ref.read(counterProvider.notifier).increment,
+            child: Text('Increment counter'),
+          ),
+        ],
+      ),
     );
+  }
+}
+
+final counterProvider = StateNotifierProvider<Counter, int?>(
+  (ref) => Counter(),
+);
+
+class Counter extends StateNotifier<int?> {
+  Counter() : super(null);
+  void increment() {
+    state = state == null ? 1 : state + 1;
   }
 }
