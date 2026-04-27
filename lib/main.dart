@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/legacy.dart';
+import 'package:riverpod_project/example/example3.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -57,6 +58,15 @@ class MyHomePage extends ConsumerWidget {
           TextButton(
             onPressed: ref.read(counterProvider.notifier).increment,
             child: Text('Increment counter'),
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => Example3()));
+            },
+            child: Text('Example 3'),
           ),
         ],
       ),
