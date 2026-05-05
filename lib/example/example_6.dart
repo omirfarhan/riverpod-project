@@ -8,6 +8,10 @@ final favoriteStatusProvider = StateProvider<FavoriteStatus>(
   (_) => FavoriteStatus.All,
 );
 
+final allFilmsProvider = StateNotifierProvider<FilmNotifier, List<Film>>(
+  (_) => FilmNotifier(),
+);
+
 class Example6 extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -83,4 +87,35 @@ const allFilms = [
     description: 'Description 1',
     isFavourite: false,
   ),
+
+  Film(
+    id: '2',
+    title: 'Bolywood cinema',
+    description: 'Description 2',
+    isFavourite: false,
+  ),
+
+  Film(
+    id: '3',
+    title: 'Tamil cinema',
+    description: 'Description 3',
+    isFavourite: false,
+  ),
+
+  Film(
+    id: '4',
+    title: 'Hollywod cinema',
+    description: 'Description 4',
+    isFavourite: false,
+  ),
 ];
+
+class FilmNotifier extends StateNotifier<List<Film>> {
+  FilmNotifier() : super(allFilms);
+
+  void update(Film film, bool isFavorite) {
+    state = state
+        .map((f) => f.id == film.id ? film.copy(isFavorite: isFavorite) : f)
+        .toList();
+  }
+}
