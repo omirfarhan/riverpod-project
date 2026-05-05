@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/legacy.dart';
 import 'package:riverpod_project/example/example3.dart';
 import 'package:riverpod_project/example/example_5.dart';
+import 'package:riverpod_project/example/example_6.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -77,6 +78,15 @@ class MyHomePage extends ConsumerWidget {
               ).push(MaterialPageRoute(builder: (context) => Example5()));
             },
             child: Text('Example 5'),
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => Example6()));
+            },
+            child: Text('Example 6'),
           ),
         ],
       ),
