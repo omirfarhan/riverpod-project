@@ -1,16 +1,9 @@
-# riverpod_project
+# Flutter riverpod state management process
 
-A new Flutter project.
+step 1: - Increment button => used in StateNotifierProvider
 
-## Getting Started
+step 2: - weather sytem => use in StateProvider, FutureProvider
 
-This project is a starting point for a Flutter application.
+step 3:- Change data in listview => used in ChangeNotifierProvider 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+step 4:- Movie list changes where shows all ,favorite, notFavorite item => used in StateProvider, StateNotifierProvider, Provider
