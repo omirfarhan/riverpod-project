@@ -28,8 +28,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blueGrey,
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+      ),
+      themeMode: ThemeMode.light,
       home: const MyHomePage(),
     );
   }
@@ -44,51 +49,62 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final date = ref.watch(currentDate);
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text('Home page')),
-      body: Column(
-        children: [
-          Text(date.toIso8601String()),
-          Consumer(
-            builder: (context, ref, child) {
-              final count = ref.watch(counterProvider);
-              final text = count == null
-                  ? 'Press your button'
-                  : count.toString();
-              return Text(text);
-            },
-          ),
-          TextButton(
-            onPressed: ref.read(counterProvider.notifier).increment,
-            child: Text('Increment counter'),
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Riverpod state management',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Text(date.toIso8601String()),
+            Consumer(
+              builder: (context, ref, child) {
+                final count = ref.watch(counterProvider);
+                final text = count == null
+                    ? 'Press your button'
+                    : count.toString();
+                return Text(text, style: TextStyle(fontSize: 25));
+              },
+            ),
+            ElevatedButton(
+              onPressed: ref.read(counterProvider.notifier).increment,
+              child: Text('Increment counter'),
+            ),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (context) => Example3()));
-            },
-            child: Text('Example 3'),
-          ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => Example3()));
+              },
+              child: Text('Example 3'),
+            ),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (context) => Example5()));
-            },
-            child: Text('Example 5'),
-          ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => Example5()));
+              },
+              child: Text('Example 5'),
+            ),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (context) => Example6()));
-            },
-            child: Text('Example 6'),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => Example6()));
+              },
+              child: Text('Example 6'),
+            ),
+          ],
+        ),
       ),
     );
   }
