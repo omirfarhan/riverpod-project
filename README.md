@@ -1,4 +1,5 @@
-# Flutter riverpod state management process
+# riverpod_project
+Flutter riverpod state management process
 
 step 1: - Increment button => used in StateNotifierProvider
 
